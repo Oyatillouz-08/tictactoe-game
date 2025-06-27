@@ -1,0 +1,355 @@
+body {
+    background: #0a0a0f url('pic.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.center-square {
+    width: 600px;
+    height: 320px;
+    background: #101014;
+    border-radius: 28px;
+    box-shadow: 0 0 32px #000a, 0 0 0 4px #222 inset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+    padding: 32px 24px;
+    max-width: 98vw;
+    max-height: 90vh;
+}
+
+.container {
+    display: block;
+    margin: 40px auto;
+    max-width: 520px;
+    width: 95vw;
+    background: rgba(10, 10, 20, 0.97);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px #0ff4, 0 0 40px #0a0a0f inset;
+    padding: 32px 24px 24px 24px;
+    text-align: center;
+    backdrop-filter: blur(2px) saturate(1.2);
+    border: 1.5px solid rgba(0,255,255,0.08);
+}
+
+.center-square .controller-emoji {
+    font-size: 3.2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.button-row {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+.button-row .neon-btn {
+    width: 220px;
+    min-width: 120px;
+    padding: 26px 0;
+    font-size: 1.5rem;
+    border-radius: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: #181a1b;
+    color: #fff;
+    border: 2.5px solid #222;
+    box-shadow: 0 0 12px #111;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, border 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.button-row .neon-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    pointer-events: none;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+
+.button-row .neon-btn:hover {
+    background: #181a1b;
+    color: #fff;
+    border-color: #ff9100;
+    box-shadow: 0 0 0 4px #ff9100, 0 0 18px 4px #ff5252;
+}
+
+.button-row .neon-btn:hover::after {
+    box-shadow:
+        0 0 0 4px #ff9100 inset,
+        0 0 18px 4px #ff5252 inset,
+        0 0 12px 2px #ff9100,
+        0 0 18px 4px #ff5252;
+    border: 2.5px solid #ff9100;
+}
+
+/* --- BOARD GRID: Make board bigger but not huge --- */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Use 1fr for equal columns */
+    grid-template-rows: repeat(3, 1fr);   /* Use 1fr for equal rows */
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 24px auto;
+    background: #181a1b;
+    border-radius: 18px; /* More polished, rounder board */
+    box-shadow: 0 0 24px #222, 0 0 32px #00e6ff22, 0 0 48px #ff910022;
+    border: 7px solid #444;
+    width: 364px;
+    height: 364px;
+    max-width: 98vw;
+    max-height: 98vw;
+}
+.cell {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background: #23272a;
+    border: 5px solid #444;
+    font-size: 2.8rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+    user-select: none;
+    border-radius: 28px; /* More round */
+    box-shadow: 0 2px 12px #111a;
+    position: relative;
+    overflow: hidden;
+}
+.cell.taken-x {
+    color: #00e6ff;
+    border-color: #444; /* No neon border */
+    text-shadow: 0 0 6px #00e6ff, 0 0 12px #00e6ff;
+}
+.cell.taken-o {
+    color: #ff9100;
+    border-color: #444; /* No neon border */
+    text-shadow: 0 0 6px #ff9100, 0 0 12px #ff9100;
+}
+.cell:hover:not(.taken-x):not(.taken-o) {
+    background: #181a1b;
+    border-color: #fff;
+    box-shadow:
+        0 0 16px 2px #ff0055,
+        0 0 24px 4px #00ff90,
+        0 0 32px 8px #00e6ff;
+    animation: rgb-glow 1.2s linear infinite;
+}
+
+/* --- SCOREBOARD: Modern, bold, clear, no neon --- */
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    background: #181a1b;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #000a;
+    padding: 18px 0 10px 0;
+    margin-bottom: 18px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border: 2.5px solid #333;
+    color: #fff;
+}
+.scoreboard .score-x {
+    color: #00e6ff;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding: 0 18px;
+}
+.scoreboard .score-o {
+    color: #ff9100;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding: 0 18px;
+}
+.scoreboard .score-draw {
+    color: #00ff90;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding: 0 18px;
+}
+
+.mode-select {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+.mode-select .neon-btn {
+    width: 140px;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: #181a1b;
+    color: #fff;
+    border: 2px solid #333;
+    box-shadow: 0 0 8px #00e6ff33;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, border 0.2s;
+}
+.mode-select .neon-btn:hover {
+    background: #23272a;
+    color: #00e6ff;
+    border-color: #00e6ff;
+    box-shadow: 0 0 16px #00e6ff;
+}
+
+#difficultySelect {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#difficultySelect label {
+    color: #00ff90;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+#difficulty {
+    background: #181a1b;
+    color: #00e6ff;
+    border: 2px solid #00e6ff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 0 8px #00e6ff, 0 0 2px #00ff90;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s, color 0.2s;
+}
+#difficulty:focus, #difficulty:hover {
+    border: 2px solid #ff9100;
+    color: #ff9100;
+    box-shadow: 0 0 16px #ff9100, 0 0 8px #00ff90;
+}
+
+/* --- Modern Restart Button --- */
+.restart-btn, .reset-btn {
+    background: linear-gradient(90deg, #23272a 60%, #181a1b 100%);
+    color: #fff;
+    border: 2.5px solid #00e6ff;
+    border-radius: 18px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 12px 36px;
+    margin: 18px auto 0 auto;
+    box-shadow: 0 0 16px #00e6ff33, 0 2px 8px #000a;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s, transform 0.15s;
+    display: block;
+    outline: none;
+}
+.restart-btn:hover, .reset-btn:hover {
+    background: #23272a;
+    color: #ff9100;
+    border-color: #ff9100;
+    box-shadow: 0 0 24px #ff9100, 0 2px 8px #000a;
+    transform: scale(1.04);
+}
+
+/* --- X Turn and O Turn Sign Modern --- */
+.turn-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding: 8px 0;
+    border-radius: 14px;
+    background: #181a1b;
+    box-shadow: 0 2px 8px #000a;
+    border: 2px solid #333;
+    color: #fff;
+}
+.turn-indicator .turn-x {
+    color: #00e6ff;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-shadow: 0 0 8px #00e6ff;
+}
+.turn-indicator .turn-o {
+    color: #ff9100;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-shadow: 0 0 8px #ff9100;
+}
+
+@keyframes rgb-glow {
+    0% { box-shadow: 0 0 16px 2px #ff0055, 0 0 24px 4px #00ff90, 0 0 32px 8px #00e6ff; }
+    33% { box-shadow: 0 0 16px 2px #00e6ff, 0 0 24px 4px #ff0055, 0 0 32px 8px #00ff90; }
+    66% { box-shadow: 0 0 16px 2px #00ff90, 0 0 24px 4px #00e6ff, 0 0 32px 8px #ff0055; }
+    100% { box-shadow: 0 0 16px 2px #ff0055, 0 0 24px 4px #00ff90, 0 0 32px 8px #00e6ff; }
+}
+
+@media (max-width: 700px) {
+    .center-square {
+        width: 98vw;
+        height: 44vw;
+        min-height: 180px;
+        min-width: 220px;
+        max-width: 99vw;
+        margin-top: 0;
+        padding: 18px 4vw;
+    }
+    .button-row .neon-btn {
+        font-size: 1.1rem;
+        padding: 16px 0;
+        min-width: 80px;
+        width: 40vw;
+        max-width: 99vw;
+    }
+    .button-row {
+        gap: 12px;
+    }
+    .board {
+        grid-template-columns: repeat(3, 28vw);
+        grid-template-rows: repeat(3, 28vw);
+        width: 90vw;
+        max-width: 99vw;
+    }
+    .cell {
+        width: 28vw;
+        height: 28vw;
+        font-size: 2.1rem;
+        min-width: 40px;
+        min-height: 40px;
+        border-width: 3px;
+    }
+    .scoreboard {
+        font-size: 0.95rem;
+        padding: 4px 0;
+        gap: 10px;
+    }
+}
